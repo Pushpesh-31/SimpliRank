@@ -142,3 +142,13 @@ MIT — use and improve freely. Built to simplify competitions, not complicate t
 ---
 
 Made with ❤️ by Pushpesh & ChatGPT
+
+---
+
+## 🙌 Acknowledgments
+
+This project was initiated and directed by **Pushpesh Sharma**, inspired by years of organizing hackathons and Datathons through SPE.
+
+If you fork this project or reuse parts of SimpliRank, a mention or attribution would be appreciated!
+
+GitHub: [github.com/pushpeshsharma](https://github.com/pushpeshsharma)
