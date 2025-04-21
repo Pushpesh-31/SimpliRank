@@ -105,3 +105,35 @@ def admin_set_limit(password: str = Form(...), limit: int = Form(...)):
         return {"error": "Invalid password"}
     set_daily_limit(limit)
     return {"message": "Limit updated"}
+
+def init_db():
+    conn = sqlite3.connect("db.sqlite3")
+    cursor = conn.cursor()
+    cursor.executescript("""
+    CREATE TABLE IF NOT EXISTS teams (
+        username TEXT PRIMARY KEY,
+        hashed_password TEXT,
+        approved INTEGER DEFAULT 0,
+        email TEXT
+    );
+    CREATE TABLE IF NOT EXISTS leaderboard (
+        team TEXT,
+        score REAL
+    );
+    CREATE TABLE IF NOT EXISTS submissions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        team TEXT,
+        filename TEXT,
+        score REAL,
+        submitted_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS config (
+        key TEXT PRIMARY KEY,
+        value TEXT
+    );
+    INSERT OR IGNORE INTO config (key, value) VALUES ('max_submissions_per_day', '5');
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
