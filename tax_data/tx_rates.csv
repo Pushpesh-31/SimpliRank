@@ -1,0 +1,4 @@
+City,State,Zip,County,State Rate,City Rate,County Rate,SPD Rate,Total Rate
+Dallas,TX,75201,Dallas,0.0625,0.01,0.01,0.0,0.0825
+Austin,TX,78701,Travis,0.0625,0.01,0.005,0.0,0.0775
+Houston,TX,77001,Harris,0.0625,0.01,0.005,0.0,0.0775
