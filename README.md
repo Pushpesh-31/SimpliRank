@@ -151,4 +151,4 @@ This project was initiated and directed by **Pushpesh Sharma**, inspired by year
 
 If you fork this project or reuse parts of SimpliRank, a mention or attribution would be appreciated!
 
-GitHub: [github.com/pushpeshsharma](https://github.com/pushpeshsharma)
+GitHub: [github.com/Pushpesh-31](https://github.com/Pushpesh-31)
