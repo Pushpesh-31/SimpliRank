@@ -2,5 +2,6 @@ fastapi
 uvicorn
 pandas
 jinja2
-requests
 python-multipart
+passlib[bcrypt]
+python-jose
