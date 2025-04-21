@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SimpliRank - Admin</title>
+  <style>
+    body { font-family: Arial; background-color: #f9f9f9; }
+    .container { max-width: 900px; margin: auto; background: white; padding: 20px; margin-top: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    h2, h3 { text-align: center; }
+    form { margin-bottom: 30px; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #007bff; color: white; }
+    .actions form { display: inline-block; margin: 0 5px; }
+    img { display: block; margin: auto; height: 120px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/static/logo.png" alt="SimpliRank Logo">
+    <h2>Admin Panel</h2>
+
+    <h3>Approve or Reject Teams</h3>
+    <table>
+      <tr><th>Team</th><th>Status</th><th>Action</th></tr>
+      {% for team, approved in teams %}
+      <tr>
+        <td>{{ team }}</td>
+        <td>{{ "Approved" if approved else "Pending" }}</td>
+        <td class="actions">
+          {% if not approved %}
+          <form action="/admin/approve" method="post">
+            <input type="hidden" name="username" value="{{ team }}">
+            <input type="password" name="password" placeholder="Admin Password">
+            <button type="submit">Approve</button>
+          </form>
+          {% else %}
+          <form action="/admin/reject" method="post">
+            <input type="hidden" name="username" value="{{ team }}">
+            <input type="password" name="password" placeholder="Admin Password">
+            <button type="submit">Reject</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h3>Upload Ground Truth</h3>
+    <form action="/admin/upload" method="post" enctype="multipart/form-data">
+      <input type="password" name="password" placeholder="Admin Password" required>
+      <input type="file" name="file" accept=".csv" required>
+      <button type="submit">Upload</button>
+    </form>
+
+    <h3>Set Daily Submission Limit</h3>
+    <form action="/admin/set-limit" method="post">
+      <input type="password" name="password" placeholder="Admin Password" required>
+      <input type="number" name="limit" placeholder="Max submissions/day" required>
+      <button type="submit">Set Limit</button>
+    </form>
+
+    <h3>Submission History</h3>
+    <table>
+      <tr><th>Time</th><th>Team</th><th>Score</th><th>File</th></tr>
+      {% for sub in submissions %}
+      <tr><td>{{ sub.submitted_at }}</td><td>{{ sub.team }}</td><td>{{ sub.score }}</td><td>{{ sub.filename }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
